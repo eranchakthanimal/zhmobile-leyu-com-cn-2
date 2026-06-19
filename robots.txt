@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://eranchakthanimal.github.io/zhmobile-leyu-com-cn-2/sitemap.xml

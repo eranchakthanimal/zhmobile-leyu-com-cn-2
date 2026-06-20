@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>亚博体育 · 信息索引与资料整理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f9fafb;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e293b;
+            line-height: 1.7;
+            font-size: 16px;
+            padding: 2rem 1.25rem;
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* hero 区域 —— 轻微留白，不喧哗 */
+        .hero {
+            margin-bottom: 3.5rem;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-weight: 450;
+            font-size: 2.1rem;
+            letter-spacing: -0.01em;
+            color: #0f172a;
+            margin-bottom: 0.55rem;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #475569;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1.2rem;
+            align-items: baseline;
+        }
+
+        .hero .sub span {
+            background: #eef2f6;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #334155;
+        }
+
+        /* 目录式网格 —— 知识库入口感 */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 2.4rem 0 3rem 0;
+        }
+
+        .index-card {
+            background: #ffffff;
+            border: 1px solid #e9edf2;
+            border-radius: 14px;
+            padding: 1.2rem 1rem;
+            transition: box-shadow 0.2s;
+        }
+
+        .index-card:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.04);
+            border-color: #d0d9e4;
+        }
+
+        .index-card .card-title {
+            font-weight: 520;
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+            color: #0f172a;
+        }
+
+        .index-card .card-desc {
+            font-size: 0.875rem;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .index-card .badge {
+            display: inline-block;
+            margin-top: 0.6rem;
+            background: #f1f5f9;
+            padding: 0.15rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: #334155;
+        }
+
+        /* 说明区 / 段落 */
+        .section-block {
+            margin-bottom: 2.8rem;
+        }
+
+        .section-block h2 {
+            font-weight: 460;
+            font-size: 1.55rem;
+            letter-spacing: -0.01em;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            border-left: 3px solid #b6c8da;
+            padding-left: 1rem;
+        }
+
+        .section-block p {
+            margin-bottom: 1.2rem;
+            color: #1e293b;
+        }
+
+        .text-link {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid #bfdbfe;
+            transition: border-color 0.15s;
+        }
+
+        .text-link:hover {
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        /* 提示区 */
+        .tip-box {
+            background: #f2f6fc;
+            border-radius: 18px;
+            padding: 1.5rem 1.8rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .tip-box .tip-title {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #1e3a5f;
+        }
+
+        .tip-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tip-box li {
+            padding: 0.2rem 0;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .tip-box li::before {
+            content: "•";
+            color: #4b7bb5;
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* faq 摘要风格 */
+        .faq-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            margin: 1.8rem 0 2.2rem 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px dashed #dde3ea;
+            padding-bottom: 1rem;
+        }
+
+        .faq-q {
+            font-weight: 470;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-q .q-icon {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .faq-a {
+            margin-top: 0.2rem;
+            padding-left: 1.8rem;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        .faq-a a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid #bfdbfe;
+        }
+
+        .faq-a a:hover {
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        /* 相关信息区 */
+        .info-area {
+            background: #ffffff;
+            border: 1px solid #ecf0f5;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            margin-top: 2.8rem;
+        }
+
+        .info-area h3 {
+            font-weight: 460;
+            font-size: 1.15rem;
+            color: #0f172a;
+            margin-bottom: 0.8rem;
+        }
+
+        .info-area p {
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #ecf0f5;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 500px) {
+            body {
+                padding: 1.2rem 1rem;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .index-grid {
+                grid-template-columns: 1fr;
+            }
+            .tip-box {
+                padding: 1.2rem;
+            }
+            .info-area {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 区：信息整理入口 -->
+    <div class="hero">
+        <h1>亚博体育 · 资料索引</h1>
+        <div class="sub">
+            <span>知识库入口式</span>
+            <span>目录感布局</span>
+            <span>极简白</span>
+        </div>
+        <p style="margin-top: 1.2rem; color: #334155;">
+            从信息整理与分类索引的角度，汇集有关 <a href="https://indexs-yabo.com" class="text-link">亚博体育</a> 的常见资料、背景说明及引导提示。
+            本页仅作内容汇总，不构成任何形式的推荐或引导。
+        </p>
+    </div>
+
+    <!-- 目录网格 —— 知识卡片 -->
+    <div class="index-grid">
+        <div class="index-card">
+            <div class="card-title">📋 平台概览</div>
+            <div class="card-desc">基础信息、服务范围及主要特点整理。</div>
+            <span class="badge">参考目录</span>
+        </div>
+        <div class="index-card">
+            <div class="card-title">📌 使用引导</div>
+            <div class="card-desc">常见操作路径、功能分区与资源索引。</div>
+            <span class="badge">提示卡片</span>
+        </div>
+        <div class="index-card">
+            <div class="card-title">🔍 内容分类</div>
+            <div class="card-desc">按主题整理相关条目，便于对照查找。</div>
+            <span class="badge">资料标签</span>
+        </div>
+        <div class="index-card">
+            <div class="card-title">📚 背景说明</div>
+            <div class="card-desc">发展脉络及行业语境简述，非官方立场。</div>
+            <span class="badge">信息摘要</span>
+        </div>
+    </div>
+
+    <!-- 说明区：切入角度——资料整理 -->
+    <div class="section-block">
+        <h2>资料整理视角</h2>
+        <p>
+            对许多人来说，快速定位相关资讯、了解整体框架是第一步。本页尝试以知识库入口的方式，将和 <a href="https://indexs-yabo.com" class="text-link">亚博体育</a> 有关的常见信息分类陈列，方便按需查阅。
+            内容均来自公开可查的素材整理，不包含主观评价或诱导性语句。
+        </p>
+        <p>
+            目录卡片中列举了四个基本维度：平台概览、使用引导、内容分类、背景说明。每一块都可以作为单独索引分支，后续可根据实际需求继续扩展或细化。
+            这种结构化的呈现，有助于减少信息过载，提升阅读和检索效率。
+        </p>
+    </div>
+
+    <!-- 提示区 -->
+    <div class="tip-box">
+        <div class="tip-title">📎 查阅提示</div>
+        <ul>
+            <li>所有资料均基于公开信息整理，不构成官方说明。</li>
+            <li>如需要更准确的细节，建议参考相关页面的原始描述。</li>
+            <li>不同分类间可能存在交叉，请以实际内容为准。</li>
+            <li>索引仅作为辅助工具，不替代用户自身的判断与核实。</li>
+        </ul>
+    </div>
+
+    <!-- FAQ 摘要区（非完整faq，仅摘取典型） -->
+    <div class="section-block">
+        <h2>常见疑问摘要</h2>
+        <div class="faq-mini">
+            <div class="faq-item">
+                <div class="faq-q"><span class="q-icon">Q</span> 亚博体育 主要提供哪些方面的信息？</div>
+                <div class="faq-a">涉及体育相关资讯、平台动态及内容整理，具体范围可参考 <a href="https://indexs-yabo.com" class="text-link">亚博体育</a> 页面上的分类导航。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="q-icon">Q</span> 资料索引的更新频率如何？</div>
+                <div class="faq-a">本页为静态展示，不承诺实时同步。建议用户根据自身需要定期查看来源页面。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="q-icon">Q</span> 是否包含个人观点或推荐？</div>
+                <div class="faq-a">不包含。所有内容均以客观整理、分类提示为主，无任何诱导或倾向性表述。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 相关信息区 -->
+    <div class="info-area">
+        <h3>相关信息</h3>
+        <p>
+            本索引页面与 <a href="https://indexs-yabo.com" class="text-link">亚博体育</a> 无直接隶属关系，仅作为第三方信息组织与呈现的尝试。
+            若您希望进一步查阅具体条目或浏览原始内容，可将上述链接作为起点。所有决策及使用行为，均由用户自主判断。
+        </p>
+        <p style="margin-top: 0.6rem; font-size: 0.9rem;">
+            本页不收集用户数据，不包含任何追踪脚本，仅提供静态文字与样式。
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+        内容整理 · 信息索引 · 无推广意图<br>
+        极简留白 · 目录感布局 · 仅供学习参考
+    </div>
+
+</div>
+</body>
+</html>

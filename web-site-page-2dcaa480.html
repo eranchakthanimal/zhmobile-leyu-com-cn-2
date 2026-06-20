@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hth · 简明访问指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f7fafc;
+      color: #1a2a3a;
+      line-height: 1.6;
+      padding: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* 开场区域 — 温和的卡片式引言 */
+    .hero-card {
+      background: linear-gradient(145deg, #e0f2f1 0%, #b2dfdb 100%);
+      padding: 2.5rem 2rem;
+      border-radius: 2rem;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 8px 20px rgba(0, 100, 100, 0.08);
+      border: 1px solid rgba(0, 128, 128, 0.15);
+    }
+
+    .hero-card h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #004d40;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-card .lead {
+      font-size: 1.1rem;
+      color: #2c5f5a;
+      border-left: 4px solid #00897b;
+      padding-left: 1rem;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 0 0.75rem 0.75rem 0;
+      padding: 0.8rem 1.2rem;
+      backdrop-filter: blur(2px);
+    }
+
+    /* 承接段落 — 网格卡片样式 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 2px 10px rgba(0, 50, 50, 0.04), 0 4px 16px rgba(0, 80, 80, 0.06);
+      border: 1px solid #d9ece8;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 100, 100, 0.08);
+    }
+
+    .card h3 {
+      color: #00695c;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h3::before {
+      content: "▹";
+      color: #26a69a;
+      font-size: 1.2rem;
+    }
+
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: #2c3e50;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card li {
+      padding: 0.3rem 0;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .card li::before {
+      content: "·";
+      color: #26a69a;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    /* 提示区域 — 温和提醒风格 */
+    .notice-box {
+      background: #e0f2f1;
+      border-radius: 2rem;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.2rem;
+      border: 1px solid #b2dfdb;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.5rem;
+    }
+
+    .notice-box .icon-label {
+      background: #00695c;
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.25rem 1rem;
+      border-radius: 2rem;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .notice-box p {
+      flex: 1;
+      min-width: 200px;
+      color: #1a3b3a;
+      font-size: 0.98rem;
+    }
+
+    .notice-box a {
+      color: #00695c;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid #80cbc4;
+      transition: border-color 0.15s;
+    }
+
+    .notice-box a:hover {
+      border-bottom-color: #00695c;
+    }
+
+    /* FAQ 摘要 — 极简折叠风格 */
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 1.8rem;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 60, 60, 0.04);
+      border: 1px solid #d9ece8;
+      margin-bottom: 2rem;
+    }
+
+    .faq-mini h2 {
+      font-size: 1.25rem;
+      color: #004d40;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-mini h2::after {
+      content: "‧‧‧";
+      color: #80cbc4;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e0f2f1;
+      padding: 0.8rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #00695c;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-a {
+      font-size: 0.9rem;
+      color: #3a5a5a;
+      padding-left: 0.5rem;
+    }
+
+    .faq-a a {
+      color: #00897b;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #b2dfdb;
+    }
+
+    .faq-a a:hover {
+      text-decoration-color: #00695c;
+    }
+
+    /* 温和结尾 */
+    .gentle-footer {
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #4f6a6a;
+      border-top: 1px solid #d9ece8;
+      padding-top: 2rem;
+    }
+
+    .gentle-footer span {
+      background: #e0f2f1;
+      padding: 0.2rem 1rem;
+      border-radius: 2rem;
+      color: #00695c;
+    }
+
+    /* 移动端微调 */
+    @media (max-width: 480px) {
+      body {
+        padding: 0.75rem;
+      }
+      .hero-card {
+        padding: 1.8rem 1.2rem;
+      }
+      .hero-card h1 {
+        font-size: 1.5rem;
+      }
+      .grid-cards {
+        gap: 1rem;
+      }
+      .card {
+        padding: 1.2rem 1rem;
+      }
+      .notice-box {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.4rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 开场短句 -->
+  <div class="hero-card">
+    <h1>想顺利使用 hth？</h1>
+    <div class="lead">
+      先了解几件简明的事。访问前花两分钟熟悉站点结构，能省去之后反复查找的麻烦。
+    </div>
+  </div>
+
+  <!-- 特点列表 + 承接段落：网格卡片 -->
+  <div class="grid-cards">
+    <div class="card">
+      <h3>直达核心</h3>
+      <p>
+        主页布局清晰，主要入口集中在顶部导航。不需要层层跳转，<a href="https://web-site-hth.com">hth</a> 本身已经做了功能分组，常用板块一眼可辨。
+      </p>
+    </div>
+    <div class="card">
+      <h3>语言与区域</h3>
+      <p>
+        页面默认显示中文，同时支持切换其他语言。如果首次加载不是预期语言，可以在页脚或设置面板中调整，改动即时生效。
+      </p>
+    </div>
+    <div class="card">
+      <h3>连接建议</h3>
+      <ul>
+        <li>使用稳定的网络环境，减少意外中断</li>
+        <li>浏览器保持最新版本，兼容性更好</li>
+        <li>如果遇到加载缓慢，可尝试刷新或稍后重试</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>账户相关</h3>
+      <ul>
+        <li>注册时填写真实信息，便于后续验证</li>
+        <li>密码建议大小写 + 数字组合，长度不低于 8 位</li>
+        <li>登录后可在个人中心查看操作记录</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 提示区域 — 温和提醒 -->
+  <div class="notice-box">
+    <span class="icon-label">⚡ 提醒</span>
+    <p>
+      直接在浏览器地址栏输入 <strong>web-site-hth.com</strong> 更可靠。避免通过第三方搜索结果或邮件链接进入，以防仿冒站点。收藏 <a href="https://web-site-hth.com">hth</a> 官方链接能节省每次输入的时间。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <h2>常见疑问摘要</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">▸ 页面加载后显示不全怎么办？</div>
+      <div class="faq-a">先检查浏览器缩放比例（建议 100%），或切换设备网络。若问题持续，可联系站点客服。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">▸ 为什么有时候打不开？</div>
+      <div class="faq-a">
+        可能是本地网络波动，或浏览器缓存需要清理。也可以尝试换个时段再试。<a href="https://web-site-hth.com">hth</a> 服务本身稳定性经过长期验证，极少出现大面积中断。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">▸ 首次使用需要注意什么？</div>
+      <div class="faq-a">
+        建议完整阅读注册页面的条款，确认自己理解使用规则。利用好「帮助中心」板块，大部分操作指引都已整理在内。
+      </div>
+    </div>
+  </div>
+
+  <!-- 温和结尾 -->
+  <div class="gentle-footer">
+    <span>说明页内容保持简洁，若有其他问题欢迎随时查阅站内指引</span>
+    <p style="margin-top: 1rem; font-size: 0.8rem; color: #6f8a8a;">
+      整理于 2025 · 本文仅作为访问辅助参考
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

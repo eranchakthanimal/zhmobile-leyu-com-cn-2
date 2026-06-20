@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞彩网 · 赛事分析 · 数据参考</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f6f8;
+            color: #1e1f24;
+            line-height: 1.6;
+            padding: 2rem 1.2rem;
+        }
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        /* hero */
+        .hero {
+            background: white;
+            border-radius: 36px;
+            padding: 3.2rem 2.2rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.02), 0 2px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid #eaedf2;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 540;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: #191b1f;
+        }
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto 1.2rem;
+            color: #3e4149;
+            font-size: 1.1rem;
+        }
+        .hero .highlight-link {
+            display: inline-block;
+            margin-top: 0.2rem;
+        }
+
+        /* 卡片通用 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.8rem;
+        }
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            border: 1px solid #e5e8ee;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.02), 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 12px 28px rgba(0,0,0,0.04), 0 4px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            color: #191b1f;
+            letter-spacing: -0.01em;
+            border-bottom: 2px solid #eef0f3;
+            padding-bottom: 0.6rem;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 520;
+            margin-bottom: 0.6rem;
+        }
+        .card p, .card li {
+            color: #3e4149;
+            font-size: 0.98rem;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+        .card li {
+            padding: 0.3rem 0 0.3rem 1.4rem;
+            position: relative;
+            margin-bottom: 0.2rem;
+        }
+        .card li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #9aa1af;
+        }
+
+        /* 优势区、说明区、FAQ 摘要共用 card */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .feature-item {
+            background: white;
+            padding: 1.6rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #eaedf2;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.02);
+        }
+        .feature-item h4 {
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
+        }
+
+        /* faq 摘要 */
+        .faq-card {
+            margin-top: 1.8rem;
+        }
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed #e2e5ec;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-question {
+            font-weight: 510;
+            font-size: 1rem;
+            margin-bottom: 0.15rem;
+        }
+        .faq-answer {
+            color: #4c4f59;
+            font-size: 0.92rem;
+            margin-top: 0.2rem;
+        }
+
+        /* 底部链接 */
+        .footer-links {
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid #dde0e6;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem 2.5rem;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.92rem;
+            color: #494d56;
+        }
+        .footer-links a {
+            color: #2d313a;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .footer-links a:hover {
+            border-bottom-color: #2d313a;
+        }
+        .footer-links .site-link {
+            font-weight: 520;
+        }
+
+        /* 响应式 */
+        @media (min-width: 640px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (min-width: 840px) {
+            .hero {
+                padding: 4rem 3.2rem;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        @media (max-width: 540px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tag {
+            background: #eff1f6;
+            display: inline-block;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.78rem;
+            color: #464b56;
+            margin-right: 0.5rem;
+        }
+        .inline-link {
+            color: #1b2b4a;
+            text-decoration: none;
+            border-bottom: 1px solid #bcc2cc;
+            transition: border-color 0.15s;
+        }
+        .inline-link:hover {
+            border-bottom-color: #1b2b4a;
+        }
+        .small-note {
+            color: #6b717d;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- hero 区 -->
+    <div class="hero">
+        <h1>赛事数据 · 理性参考</h1>
+        <p>在体育竞猜的世界里，信息与判断同样重要。我们整理赛事走向、球队状态与历史数据，为你提供冷静的分析视角。<br>了解 <a href="https://html-jcw.com" class="inline-link">竞彩网</a> 如何成为日常查阅的实用工具。</p>
+        <div class="small-note" style="margin-top:1.6rem;">
+            <span class="tag">⚽ 联赛数据</span>
+            <span class="tag">🏀 球员统计</span>
+            <span class="tag">📊 赔率趋势</span>
+        </div>
+    </div>
+
+    <!-- 优势区 -->
+    <section style="margin-bottom: 2.4rem;">
+        <h2 class="section-title">它为什么值得留意</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <h4>📈 数据整合</h4>
+                <p>将分散的赛事信息汇集一处，减少多平台跳转的琐碎感。覆盖主流联赛与杯赛，方便快速对比。</p>
+            </div>
+            <div class="feature-item">
+                <h4>🧭 界面克制</h4>
+                <p>信息层级清晰，无过度视觉干扰。你可以在几分钟内找到想要的数据卡片，而不是迷失在复杂菜单中。</p>
+            </div>
+            <div class="feature-item">
+                <h4>⚖️ 中立呈现</h4>
+                <p>不渲染情绪，不夸大结果。提供历史交锋、近期表现等客观指标，帮助你自己做出判断。</p>
+            </div>
+            <div class="feature-item">
+                <h4>🕒 更新节奏</h4>
+                <p>赛前、赛中、赛后保持信息同步。无论你关注的是开场前的指数波动，还是赛后的统计复盘，都有内容可查。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 说明区 + 场景（合并为两列卡片） -->
+    <section style="margin-bottom: 2.4rem;">
+        <h2 class="section-title">典型使用场景</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>赛前准备期</h3>
+                <p>浏览未来24小时赛程，查看球队伤停状况与近五场走势。许多用户习惯在周末比赛日之前，打开 <a href="https://html-jcw.com" class="inline-link">竞彩网</a> 做一次快速扫描。</p>
+                <ul>
+                    <li>伤停名单汇总</li>
+                    <li>主客场胜率对比</li>
+                    <li>近期进球分布</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>赛中跟进</h3>
+                <p>比赛进行时关注实时数据：控球率、射正次数、角球等。网站提供简洁的实时卡片，辅助你理解场上局势。</p>
+                <ul>
+                    <li>实时事件播报</li>
+                    <li>赔率动态变化</li>
+                    <li>红黄牌 / 换人</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>赛后复盘</h3>
+                <p>比赛结束后，完整的统计表单可用来回顾预期进球、防守数据等。一些深度爱好者会结合这些数字调整自己的分析模型。</p>
+                <ul>
+                    <li>全场技术统计</li>
+                    <li>球员评分摘要</li>
+                    <li>赛季趋势图表</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>长期观察</h3>
+                <p>联赛积分榜、射手榜、助攻榜等长期维度数据同样具备参考价值。适合那些希望跟踪球队整个赛季轨迹的用户。</p>
+                <ul>
+                    <li>积分与净胜球</li>
+                    <li>主客场差异统计</li>
+                    <li>近期状态曲线</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ 摘要 -->
+    <section style="margin-bottom: 1.2rem;">
+        <h2 class="section-title">常见疑问摘要</h2>
+        <div class="card faq-card">
+            <div class="faq-item">
+                <div class="faq-question">数据来源可靠吗？</div>
+                <div class="faq-answer">网站整合公开的体育统计与赔率市场数据，不提供个人建议，所有信息均来自可查证的统计源。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">需要注册或付费吗？</div>
+                <div class="faq-answer">不需要。浏览基础数据、赛程与统计无需注册，无隐藏收费模块。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">移动端体验如何？</div>
+                <div class="faq-answer">采用响应式布局，手机与平板均可正常阅读。卡片式结构在小屏幕上依然清晰。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">网站更新频率？</div>
+                <div class="faq-answer">每日更新，主流赛事数据在比赛期间保持实时刷新。非高峰时段数据每半小时同步一次。</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+        <span>数据参考站 · <a href="https://html-jcw.com" class="site-link">竞彩网</a></span>
+        <span>· 内容仅供信息参考 · 理性对待</span>
+        <span style="color:#7c8290;">© 2025 · 开放索引</span>
+    </div>
+
+</div>
+</body>
+</html>
